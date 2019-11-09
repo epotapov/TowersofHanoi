@@ -21,8 +21,6 @@ public class TheTowers extends javax.swing.JFrame {
         towertitle.setVisible(true);
         playbutton.setVisible(true);
         playbutton.setEnabled(true);
-        dssdfsdfsdfsdfsdfsdf
-                
     }
 
     /**
