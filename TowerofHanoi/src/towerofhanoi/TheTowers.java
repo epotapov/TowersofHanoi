@@ -4,25 +4,24 @@
  * and open the template in the editor.
  */
 package towerofhanoi;
+//import java.awt.Rectangle;
 
 /**
  *
  * @author Edward Potapov
  */
 public class TheTowers extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TheTowers
-     */
+    GamePad draw;
     public TheTowers() {
         initComponents();
-        setResizable(false);
+        setResizable(true); //
         towercredits.setVisible(true);
         towertitle.setVisible(true);
         playbutton.setVisible(true);
         playbutton.setEnabled(true);
+        draw = new GamePad();
+        //draw.setVisible(false);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,9 +34,6 @@ public class TheTowers extends javax.swing.JFrame {
         towercredits = new javax.swing.JLabel();
         towertitle = new javax.swing.JLabel();
         playbutton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Towers of Hanoi");
@@ -67,25 +63,16 @@ public class TheTowers extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(259, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(towertitle)
-                    .addComponent(towercredits))
-                .addGap(260, 260, 260))
             .addGroup(layout.createSequentialGroup()
-                .addGap(351, 351, 351)
+                .addContainerGap(195, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(towercredits)
+                    .addComponent(towertitle))
+                .addGap(195, 195, 195))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(283, 283, 283)
                 .addComponent(playbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(140, 140, 140)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(226, 226, 226)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(141, 141, 141)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,17 +81,9 @@ public class TheTowers extends javax.swing.JFrame {
                 .addComponent(towertitle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(towercredits, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
+                .addGap(84, 84, 84)
                 .addComponent(playbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(235, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(145, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(121, 121, 121)))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +94,7 @@ public class TheTowers extends javax.swing.JFrame {
         towertitle.setVisible(false);
         playbutton.setVisible(false);
         playbutton.setEnabled(false);
+        setContentPane(draw);
     }//GEN-LAST:event_playbuttonActionPerformed
 
     /**
@@ -153,9 +133,6 @@ public class TheTowers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton playbutton;
     private javax.swing.JLabel towercredits;
     private javax.swing.JLabel towertitle;
