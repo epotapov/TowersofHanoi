@@ -74,9 +74,9 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
     @Override
     public void mousePressed(MouseEvent me) {
         Point pt = me.getPoint();
-        r1xdiff = pt.x - r.x;
-        r1ydiff = pt.y - r.y;
         if (pt.x >= r.x && pt.y >= r.y && pt.x <= (r.x + r.width) && pt.y <= (r.y + r.height)) {
+            r1xdiff = pt.x - r.x;
+            r1ydiff = pt.y - r.y;
             r.x = pt.x - r1xdiff;
             r.y = pt.y - r1ydiff;
             b = true;
