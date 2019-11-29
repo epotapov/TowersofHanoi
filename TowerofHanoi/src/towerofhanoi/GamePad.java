@@ -10,10 +10,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public  class GamePad extends javax.swing.JPanel implements MouseListener, MouseMotionListener{
-    boolean b = false;
-    Rectangle r = new Rectangle(0,0,100,100);
+    boolean b = true;
+    Rectangle r = new Rectangle(100,100,100,100);
     JButton butt = new JButton("Restart");
-    
+    int r1xdiff;
+    int r1ydiff;
     public GamePad() {
         setLayout(null);
         addMouseListener(this);
@@ -40,7 +41,6 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
 
     @Override
     public void mouseReleased(MouseEvent me) {
-        b = false;
         repaint();
     }
 
@@ -56,11 +56,12 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
 
     @Override
     public void mouseDragged(MouseEvent me) {
-        if(b) {
-           Point pt = me.getPoint();
-           r.x = pt.x - r.width / 2;
-           r.y = pt.y - r.height / 2;
-           repaint(); 
+        Point pt = me.getPoint();
+        if (pt.x >= r.x && pt.y >= r.y && pt.x <= (r.x + r.width) && pt.y <= (r.y + r.height)) {
+            r.x = pt.x - r1xdiff;
+            r.y = pt.y - r1ydiff;
+            b = true;
+            repaint();
         }
         
     }
@@ -71,13 +72,15 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
     }
 
     @Override
-    public void mousePressed(MouseEvent me) 
-    {
+    public void mousePressed(MouseEvent me) {
         Point pt = me.getPoint();
-        r.x = pt.x - r.width / 2;
-        r.y = pt.y - r.height / 2;
-        b = true;
-        repaint();
-        
+        r1xdiff = pt.x - r.x;
+        r1ydiff = pt.y - r.y;
+        if (pt.x >= r.x && pt.y >= r.y && pt.x <= (r.x + r.width) && pt.y <= (r.y + r.height)) {
+            r.x = pt.x - r1xdiff;
+            r.y = pt.y - r1ydiff;
+            b = true;
+            repaint();
+        }
     }
 }
