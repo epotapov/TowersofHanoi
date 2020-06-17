@@ -5,25 +5,31 @@
  */
 package towerofhanoi;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.awt.event.*;
-import javax.swing.*;
+import javafx.scene.control.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.layout.VBox;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
-public  class GamePad extends javax.swing.JPanel implements MouseListener, MouseMotionListener{
+public  class GamePad extends Scene {
     boolean b = true;
     Rectangle r = new Rectangle(100,100,100,100);
-    JButton butt = new JButton("Restart");
     int r1xdiff;
     int r1ydiff;
     public GamePad() {
-        setLayout(null);
-        addMouseListener(this);
-        addMouseMotionListener(this);
-        butt.setBounds(10, 10, butt.getPreferredSize().width, butt.getPreferredSize().height);
-        add(butt);
+        super(null);
+        //addMouseListener(this);
+        //addMouseMotionListener(this);
         
     }
-    @Override
+    /*@Override
     protected void paintComponent(Graphics g) {
         g.setColor(Color.red);
         g.fillRect(getX(), getY(), getWidth(), getHeight());
@@ -82,5 +88,5 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
             b = true;
             repaint();
         }
-    }
+    }*/
 }
