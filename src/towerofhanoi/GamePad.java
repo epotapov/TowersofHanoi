@@ -5,9 +5,8 @@
  */
 package towerofhanoi;
 
-import java.awt.Rectangle;
-import java.awt.event.*;
 import javafx.scene.control.*;
+import javafx.scene.shape.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -15,19 +14,25 @@ import javafx.scene.text.Font;
 import javafx.scene.layout.VBox;
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public  class GamePad extends Scene {
+public  class GamePad extends Pane {
     boolean b = true;
     Rectangle r = new Rectangle(100,100,100,100);
     int r1xdiff;
     int r1ydiff;
     public GamePad() {
-        super(null);
+        draw();
         //addMouseListener(this);
         //addMouseMotionListener(this);
         
+    }
+    void draw() {
+        setStyle("-fx-background-color: red;");
+        getChildren().add(r);
     }
     /*@Override
     protected void paintComponent(Graphics g) {
@@ -38,26 +43,6 @@ public  class GamePad extends Scene {
             g.setColor(Color.black);
             g.fillRect(r.x, r.y, r.width, r.height);
         }
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent me) {
-        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent me) {
-        repaint();
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent me) {
-        
-    }
-
-    @Override
-    public void mouseExited(MouseEvent me) {
-        
     }
 
     @Override

@@ -22,11 +22,13 @@ import javafx.stage.Stage;
  */
 public class TheTowers extends Application {
     Scene startMenu;
+    Scene Game;
     VBox layout;
+    VBox layout2;
     Button startGame;
     Label gameTitle;
     Font titleFont;
-    
+    GamePad pad;
     public static void main(String[] args) {
         launch(args);
     }
@@ -41,11 +43,19 @@ public class TheTowers extends Application {
         startGame = new Button("Let's Play");
         titleFont = Font.font(20);
         startGame.setFont(titleFont);
-        startGame.setOnAction(e -> System.out.println("Hello"));
         layout.setAlignment(Pos.CENTER);
         layout.getChildren().add(gameTitle);
         layout.getChildren().add(startGame);
         layout.setSpacing(100);
+        
+        startGame.setOnAction(e -> {
+            layout2 = new VBox();
+            Game = new Scene(layout2, primaryStage.getX(), primaryStage.getY());
+            GamePad g = new GamePad();
+            layout2.getChildren().add(g);
+            primaryStage.setScene(Game);
+            primaryStage.show();
+        });
         primaryStage.setScene(startMenu);
         primaryStage.show();
     }
