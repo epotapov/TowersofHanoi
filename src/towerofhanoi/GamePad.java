@@ -5,67 +5,25 @@
  */
 package towerofhanoi;
 
-import java.awt.Point;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
-import javafx.event.EventHandler;
-import javafx.event.Event;
-import javafx.event.EventType;
-import javafx.geometry.Point2D;
-import javafx.scene.input.MouseButton;
-import static javafx.scene.input.MouseEvent.MOUSE_PRESSED;
-import javafx.scene.layout.Pane;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-/**
- *
- * @author Edward Potapov
- */
-public  class GamePad extends Pane implements EventHandler<MouseEvent>{
-    boolean b = false;
+public  class GamePad extends javax.swing.JPanel implements MouseListener, MouseMotionListener{
+    boolean b = true;
     Rectangle r = new Rectangle(100,100,100,100);
-    double Rx;
-    double Ry;
-    double r1xdiff;
-    double r1ydiff;
+    JButton butt = new JButton("Restart");
+    int r1xdiff;
+    int r1ydiff;
     public GamePad() {
-        addEventHandler(MouseEvent.ANY, this);
-        draw();
-        //addMouseListener(this);
-        //addMouseMotionListener(this);
-    }
-    void draw() {
-        setStyle("-fx-background-color: red;");
-        getChildren().add(r);
+        setLayout(null);
+        addMouseListener(this);
+        addMouseMotionListener(this);
+        butt.setBounds(10, 10, butt.getPreferredSize().width, butt.getPreferredSize().height);
+        add(butt);
+        
     }
     @Override
-    public void handle(MouseEvent t) {
-        int i = 0;
-        if(t.getButton() == MouseButton.PRIMARY) {
-            if(t.getEventType() == MouseEvent.MOUSE_PRESSED) {
-                Point2D pt = new Point2D(t.getX(),t.getY());
-                if (pt.getX() >= r.getX() && pt.getY() >= r.getY() && pt.getX() <= (r.getX() + r.getWidth()) && pt.getY() <= (r.getY() + r.getHeight())) {
-                    r1xdiff = pt.getX() - r.getX();
-                    r1ydiff = pt.getY() - r.getY();
-                    b = true;
-                }
-            }
-            else if(t.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-                Point2D pt = new Point2D(t.getX(),t.getY());
-                if(b) {
-                    Rx = pt.getX() - r1xdiff;
-                    Ry = pt.getY() - r1ydiff;
-                    r.setX(Rx);
-                    r.setY(Ry);
-                }
-            }
-            else if(t.getEventType() == MouseEvent.MOUSE_RELEASED) {
-                r.setX(Rx);
-                r.setY(Ry);
-                b = false;
-            }
-        }
-    }
-    /*@Override
     protected void paintComponent(Graphics g) {
         g.setColor(Color.red);
         g.fillRect(getX(), getY(), getWidth(), getHeight());
@@ -74,6 +32,26 @@ public  class GamePad extends Pane implements EventHandler<MouseEvent>{
             g.setColor(Color.black);
             g.fillRect(r.x, r.y, r.width, r.height);
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        repaint();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        
     }
 
     @Override
@@ -104,5 +82,5 @@ public  class GamePad extends Pane implements EventHandler<MouseEvent>{
             b = true;
             repaint();
         }
-    }*/
+    }
 }
