@@ -5,34 +5,65 @@
  */
 package towerofhanoi;
 
-import javafx.scene.control.*;
+import java.awt.Point;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.text.Font;
-import javafx.scene.layout.VBox;
-import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
+import javafx.event.Event;
+import javafx.event.EventType;
+import javafx.geometry.Point2D;
+import javafx.scene.input.MouseButton;
+import static javafx.scene.input.MouseEvent.MOUSE_PRESSED;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
-public  class GamePad extends Pane {
-    boolean b = true;
+/**
+ *
+ * @author Edward Potapov
+ */
+public  class GamePad extends Pane implements EventHandler<MouseEvent>{
+    boolean b = false;
     Rectangle r = new Rectangle(100,100,100,100);
-    int r1xdiff;
-    int r1ydiff;
+    double Rx;
+    double Ry;
+    double r1xdiff;
+    double r1ydiff;
     public GamePad() {
+        addEventHandler(MouseEvent.ANY, this);
         draw();
         //addMouseListener(this);
         //addMouseMotionListener(this);
-        
     }
     void draw() {
         setStyle("-fx-background-color: red;");
         getChildren().add(r);
+    }
+    @Override
+    public void handle(MouseEvent t) {
+        int i = 0;
+        if(t.getButton() == MouseButton.PRIMARY) {
+            if(t.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                Point2D pt = new Point2D(t.getX(),t.getY());
+                if (pt.getX() >= r.getX() && pt.getY() >= r.getY() && pt.getX() <= (r.getX() + r.getWidth()) && pt.getY() <= (r.getY() + r.getHeight())) {
+                    r1xdiff = pt.getX() - r.getX();
+                    r1ydiff = pt.getY() - r.getY();
+                    b = true;
+                }
+            }
+            else if(t.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                Point2D pt = new Point2D(t.getX(),t.getY());
+                if(b) {
+                    Rx = pt.getX() - r1xdiff;
+                    Ry = pt.getY() - r1ydiff;
+                    r.setX(Rx);
+                    r.setY(Ry);
+                }
+            }
+            else if(t.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                r.setX(Rx);
+                r.setY(Ry);
+                b = false;
+            }
+        }
     }
     /*@Override
     protected void paintComponent(Graphics g) {

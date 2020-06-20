@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.layout.VBox;
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
@@ -24,7 +25,7 @@ public class TheTowers extends Application {
     Scene startMenu;
     Scene Game;
     VBox layout;
-    VBox layout2;
+    StackPane layout2;
     Button startGame;
     Label gameTitle;
     Font titleFont;
@@ -35,6 +36,10 @@ public class TheTowers extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Towers of Hanoi");
+        primaryStage.setMinHeight(300);
+        primaryStage.setMinWidth(600);
+        primaryStage.setMaxHeight(650);
+        primaryStage.setMaxWidth(1000);
         layout = new VBox();
         gameTitle = new Label("Towers of Hanoi");
         titleFont = Font.font("Rockwell", FontWeight.BOLD, 70);
@@ -47,16 +52,15 @@ public class TheTowers extends Application {
         layout.getChildren().add(gameTitle);
         layout.getChildren().add(startGame);
         layout.setSpacing(100);
-        
+        primaryStage.setScene(startMenu);
         startGame.setOnAction(e -> {
-            layout2 = new VBox();
-            Game = new Scene(layout2, primaryStage.getX(), primaryStage.getY());
+            layout2 = new StackPane();
             GamePad g = new GamePad();
             layout2.getChildren().add(g);
+            Game = new Scene(layout2, startMenu.getWidth(), startMenu.getHeight());
             primaryStage.setScene(Game);
             primaryStage.show();
         });
-        primaryStage.setScene(startMenu);
         primaryStage.show();
     }
 }
