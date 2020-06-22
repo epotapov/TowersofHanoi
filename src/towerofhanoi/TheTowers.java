@@ -12,37 +12,50 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.Dimension;
+import java.awt.Font;
 /**
  *
  * @author Edward Potapov
  */
 public class TheTowers {
-    static JFrame window;
+    public static JFrame window;
     static JPanel homePanel;
     static JLabel gameTitle;
     static JButton startGame;
     static BoxLayout bl;
+    static Font f;
     public static void main(String[] args) {
         window = new JFrame("Towers of Hanoi");
         gameTitle = new JLabel("Towers of Hanoi");
         startGame = new JButton("Let's Play");
         homePanel = new JPanel();
         bl = new BoxLayout(homePanel, BoxLayout.Y_AXIS);
+        f = new Font("Rockwell", Font.PLAIN,70);
+        gameTitle.setFont(f);
         homePanel.setLayout(bl);
         startGame.setPreferredSize(new Dimension(30, 20));
         gameTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.addActionListener(e -> {
+            JPanel mainGamePanel = new JPanel();
+            mainGamePanel.setLayout(new BoxLayout(mainGamePanel, BoxLayout.Y_AXIS));
             GamePad gamer = new GamePad();
+            GameBar gb = new GameBar();
+            mainGamePanel.add(gb);
+            mainGamePanel.add(gamer);
+            gb.setSize(new Dimension(window.getWidth(),gb.exampleButt.getHeight()));
             window.remove(homePanel);
-            window.add(gamer);
+            window.add(mainGamePanel);
             window.setVisible(true);
         });
-        homePanel.add(gameTitle);
-        homePanel.add(startGame);
         window.setSize(800, 550);
         window.setMinimumSize(new Dimension(800, 550));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        int i = window.getHeight() / 2;
+        homePanel.add(Box.createRigidArea(new Dimension(0, window.getHeight() / 4)));
+        homePanel.add(gameTitle);
+        homePanel.add(Box.createRigidArea(new Dimension(0, window.getHeight() / 5)));
+        homePanel.add(startGame);
         window.getContentPane().add(homePanel);
         window.setVisible(true);
     }
