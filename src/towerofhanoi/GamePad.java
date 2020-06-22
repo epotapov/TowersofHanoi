@@ -7,15 +7,23 @@ package towerofhanoi;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public  class GamePad extends javax.swing.JPanel implements MouseListener, MouseMotionListener{
     boolean b = true;
     boolean move = false;
     Rectangle r = new Rectangle(100,100,100,100);
+    BufferedImage facedude;
     int r1xdiff;
     int r1ydiff;
     public GamePad() {
+        try {
+            facedude = ImageIO.read(new File("src//Resources//facedude.png"));
+        }catch(IOException e) {}
         setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -23,11 +31,12 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
     @Override
     protected void paintComponent(Graphics g) {
         g.setColor(Color.red);
-        g.fillRect(getX(), getY(), getWidth(), getHeight());
-        
+        g.fillRect(0, 0, getWidth(), getHeight());
+        int i = getY();
         if(b) {
-            g.setColor(Color.black);
-            g.fillRect(r.x, r.y, r.width, r.height);
+            g.drawImage(facedude, 200, 200, this);
+            //g.setColor(Color.black);
+            //g.fillRect(r.x, r.y, r.width, r.height);
         }
     }
 

@@ -37,15 +37,13 @@ public class TheTowers {
         gameTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.addActionListener(e -> {
-            JPanel mainGamePanel = new JPanel();
-            mainGamePanel.setLayout(new BoxLayout(mainGamePanel, BoxLayout.Y_AXIS));
+            window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.Y_AXIS));
             GamePad gamer = new GamePad();
             GameBar gb = new GameBar();
-            mainGamePanel.add(gb);
-            mainGamePanel.add(gamer);
-            gb.setSize(new Dimension(window.getWidth(),gb.exampleButt.getHeight()));
+            window.getContentPane().add(gb);
+            window.getContentPane().add(gamer);
+            //gb.setSize(new Dimension(window.getWidth(),100));
             window.remove(homePanel);
-            window.add(mainGamePanel);
             window.setVisible(true);
         });
         window.setSize(800, 550);

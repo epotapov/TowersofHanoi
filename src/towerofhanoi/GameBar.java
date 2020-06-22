@@ -24,7 +24,8 @@ public class GameBar extends javax.swing.JPanel {
             System.out.println("yello");
         });
         setLayout(mainLayout);
-        setBackground(Color.GRAY);
+        //setBackground(Color.GRAY);
+        //this.setBorder(border);
         add(restartButt);
         add(exampleButt);
     }
