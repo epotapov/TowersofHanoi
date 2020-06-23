@@ -18,6 +18,8 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
     boolean move = false;
     Rectangle r = new Rectangle(100,100,100,100);
     BufferedImage facedude;
+    int facedudex = 200;
+    int facedudey = 200;
     int r1xdiff;
     int r1ydiff;
     public GamePad() {
@@ -34,7 +36,7 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
         g.fillRect(0, 0, getWidth(), getHeight());
         int i = getY();
         if(b) {
-            g.drawImage(facedude, 200, 200, this);
+            g.drawImage(facedude, facedudex, facedudey, this);
             //g.setColor(Color.black);
             //g.fillRect(r.x, r.y, r.width, r.height);
         }
@@ -65,8 +67,8 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
     public void mouseDragged(MouseEvent me) {
         Point pt = me.getPoint();
         if (move) {
-            r.x = pt.x - r1xdiff;
-            r.y = pt.y - r1ydiff;
+            facedudex = pt.x - r1xdiff;
+            facedudey = pt.y - r1ydiff;
             b = true;
             repaint();
         }
@@ -81,11 +83,11 @@ public  class GamePad extends javax.swing.JPanel implements MouseListener, Mouse
     @Override
     public void mousePressed(MouseEvent me) {
         Point pt = me.getPoint();
-        if (pt.x >= r.x && pt.y >= r.y && pt.x <= (r.x + r.width) && pt.y <= (r.y + r.height)) {
-            r1xdiff = pt.x - r.x;
-            r1ydiff = pt.y - r.y;
-            r.x = pt.x - r1xdiff;
-            r.y = pt.y - r1ydiff;
+        if (pt.x >= facedudex && pt.y >= facedudey && pt.x <= (facedudex + facedude.getWidth()) && pt.y <= (facedudey + facedude.getHeight())) {
+            r1xdiff = pt.x - facedudex;
+            r1ydiff = pt.y - facedudey;
+            facedudex = pt.x - r1xdiff;
+            facedudey = pt.y - r1ydiff;
             b = true;
             move = true;
             repaint();
