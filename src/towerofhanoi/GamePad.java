@@ -36,11 +36,11 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     protected void paintComponent(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
+        for(int i = 1; i < 4; i++) {
+            g.drawImage(peg, (this.getWidth() * i) / 4 - peg.getWidth() / 2, (this.getHeight() - peg.getHeight()) / 2, this);
+        }
         int i = getY();
         if(b) {
-            g.drawImage(peg, this.getWidth() / 4 - 15, 43, this);
-            g.drawImage(peg, (this.getWidth() * 2) / 4 - 15, 43, this);
-            g.drawImage(peg, (this.getWidth() * 3) / 4 - 15, 43, this);
             g.drawImage(facedude, facedudex, facedudey, this);
             //g.setColor(Color.black);
             //g.fillRect(r.x, r.y, r.width, r.height);
