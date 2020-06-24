@@ -30,10 +30,10 @@ public class TheTowers {
         startGame = new JButton("Let's Play");
         homePanel = new JPanel();
         bl = new BoxLayout(homePanel, BoxLayout.Y_AXIS);
-        f = new Font("Rockwell", Font.PLAIN,70);
+        f = new Font("Rockwell", Font.PLAIN,90);
         gameTitle.setFont(f);
         homePanel.setLayout(bl);
-        startGame.setPreferredSize(new Dimension(30, 20));
+        startGame.setPreferredSize(new Dimension(40, 40));
         gameTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.addActionListener(e -> {
@@ -46,8 +46,8 @@ public class TheTowers {
             window.remove(homePanel);
             window.setVisible(true);
         });
-        window.setSize(800, 550);
-        window.setMinimumSize(new Dimension(800, 550));
+        window.setSize(900, 600);
+        window.setMinimumSize(new Dimension(900, 600));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         int i = window.getHeight() / 2;
         homePanel.add(Box.createRigidArea(new Dimension(0, window.getHeight() / 4)));

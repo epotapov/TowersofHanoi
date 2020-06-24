@@ -12,7 +12,7 @@ import javax.swing.*;
  *
  * @author Edward Potapov
  */
-public class GameBar extends javax.swing.JPanel {
+public class GameBar extends JPanel {
     JButton restartButt;
     JButton exampleButt;
     BoxLayout mainLayout;
