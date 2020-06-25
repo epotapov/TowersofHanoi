@@ -19,6 +19,13 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     Rectangle r = new Rectangle(100,100,100,100);
     BufferedImage facedude;
     BufferedImage peg;
+    BufferedImage ring1;
+    BufferedImage ring2;
+    BufferedImage ring3;
+    BufferedImage ring4;
+    BufferedImage ring5;
+    BufferedImage ring6;
+    BufferedImage ring7;
     int facedudex = 200;
     int facedudey = 200;
     int r1xdiff;
@@ -27,6 +34,13 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         try {
             facedude = ImageIO.read(new File("src//Resources//facedude.png"));
             peg = ImageIO.read(new File("src//Resources//main-Peg.png"));
+            ring1 = ImageIO.read(new File("src//Resources//ring1.png"));
+            ring2 = ImageIO.read(new File("src//Resources//ring2.png"));
+            ring3 = ImageIO.read(new File("src//Resources//ring3.png"));
+            ring4 = ImageIO.read(new File("src//Resources//ring4.png"));
+            ring5 = ImageIO.read(new File("src//Resources//ring5.png"));
+            ring6 = ImageIO.read(new File("src//Resources//ring6.png"));
+            ring7 = ImageIO.read(new File("src//Resources//ring7.png"));
         }catch(IOException e) {}
         setLayout(null);
         addMouseListener(this);
@@ -36,10 +50,19 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     protected void paintComponent(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
-        for(int i = 1; i < 4; i++) {
-            g.drawImage(peg, (this.getWidth() * i) / 4 - peg.getWidth() / 2, (this.getHeight() - peg.getHeight()) / 2, this);
+        for(int i = 1; i < 25; i++) {
+            if (i == 5 || i == 12 || i == 19) {
+                g.drawImage(peg, (this.getWidth() * i) / 24 - (peg.getWidth() / 2), (this.getHeight() - peg.getHeight()) / 2, this);
+            }
+            
         }
-        int i = getY();
+        g.drawImage(ring1, (this.getWidth() * 5) / 24 - (ring1.getWidth() / 2), ((this.getHeight() + peg.getHeight()) / 2) - 60, this);
+        g.drawImage(ring2, (this.getWidth() * 5) / 24 - (ring2.getWidth() / 2), ((this.getHeight() + peg.getHeight()) / 2) - 120, this);
+        g.drawImage(ring3, (this.getWidth() * 5) / 24 - (ring3.getWidth() / 2), ((this.getHeight() + peg.getHeight()) / 2) - 180, this);
+        g.drawImage(ring4, (this.getWidth() * 5) / 24 - (ring4.getWidth() / 2), ((this.getHeight() + peg.getHeight()) / 2) - 240, this);
+        g.drawImage(ring5, (this.getWidth() * 5) / 24 - (ring5.getWidth() / 2), ((this.getHeight() + peg.getHeight()) / 2) - 300, this);
+        g.drawImage(ring6, (this.getWidth() * 5) / 24 - (ring6.getWidth() / 2), ((this.getHeight() + peg.getHeight()) / 2) - 360, this);
+        g.drawImage(ring7, (this.getWidth() * 5) / 24 - (ring7.getWidth() / 2), ((this.getHeight() + peg.getHeight()) / 2) - 420, this);
         if(b) {
             g.drawImage(facedude, facedudex, facedudey, this);
             //g.setColor(Color.black);
@@ -78,7 +101,6 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
             b = true;
             repaint();
         }
-        
     }
 
     @Override

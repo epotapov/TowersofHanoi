@@ -46,8 +46,8 @@ public class TheTowers {
             window.remove(homePanel);
             window.setVisible(true);
         });
-        window.setSize(900, 600);
-        window.setMinimumSize(new Dimension(900, 600));
+        window.setSize(1200, 600);
+        window.setMinimumSize(new Dimension(1200, 600));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         int i = window.getHeight() / 2;
         homePanel.add(Box.createRigidArea(new Dimension(0, window.getHeight() / 4)));
