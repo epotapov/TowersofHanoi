@@ -16,20 +16,25 @@ import javax.imageio.ImageIO;
  * @author Edward Potapov
  */
 public class Ring {
+    int value;
     BufferedImage ring;
     Point p1;
-    Point p2;
-    public Ring(String file, int xin, int yin) {
+    Point pO;
+    public Ring(String file, int xin, int yin, int v) {
         try {
             ring = ImageIO.read(new File(file));
         } catch (IOException e) {}
         p1 = new Point(xin - (ring.getWidth() / 2), yin);
-        p2 = new Point(p1.x + ring.getWidth(), p1.y + ring.getHeight());
+        value = v;
     }
     void resize(int x, int y) {
         p1.x = x - (ring.getWidth() / 2);
         p1.y = y;
-        p2.x = p1.x + ring.getWidth();
-        p2.y = p1.y + ring.getHeight();
+    }
+    void setorigin() {
+        pO = new Point(p1.x, p1.y);
+    }
+    void goBack() {
+        p1 = new Point(pO.x, pO.y);
     }
 }

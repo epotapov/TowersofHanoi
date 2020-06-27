@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public  class GamePad extends JPanel implements MouseListener, MouseMotionListener, ComponentListener{
-    boolean b = true;
+
     boolean move = false;
     boolean firsttime = true;
     boolean refresh = false;
@@ -25,11 +25,8 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     ArrayList<Ring> peg2;
     ArrayList<Ring> peg3;
     Point ppeg1;
-    Point ppeg1b;
     Point ppeg2;
-    Point ppeg2b;
     Point ppeg3;
-    Point ppeg3b;
     BufferedImage facedude;
     BufferedImage peg;
     int whicharray = 0;
@@ -48,13 +45,13 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     }
     
     void ringsAdded() {
-        peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60));
-        peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120));
-        peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180));
-        peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240));
-        peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300));
-        peg3.add(new Ring("src//Resources//ring6.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 360));
-        peg2.add(new Ring("src//Resources//ring7.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 420));
+        peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
+        peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
+        peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
+        peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
+        peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300, 3));
+        peg1.add(new Ring("src//Resources//ring6.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 360, 2));
+        peg1.add(new Ring("src//Resources//ring7.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 420, 1));
     }
     
     @Override
@@ -74,7 +71,15 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         g.fillRect(0, 0, getWidth(), getHeight());
         for(int i = 1; i < 25; i++) {
             if (i == 5 || i == 12 || i == 19) {
+                
                 g.drawImage(peg, (this.getWidth() * i) / 24 - (peg.getWidth() / 2), (this.getHeight() - peg.getHeight()) / 2, this);
+                if(i == 5) 
+                    ppeg1 = new Point((this.getWidth() * 5) / 24 - (peg.getWidth() / 2), (this.getHeight() - peg.getHeight()) / 2);
+                if(i == 12)
+                    ppeg2 = new Point((this.getWidth() * 12) / 24 - (peg.getWidth() / 2), (this.getHeight() - peg.getHeight()) / 2);
+                if(i == 19)
+                    ppeg3 = new Point((this.getWidth() * 19) / 24 - (peg.getWidth() / 2), (this.getHeight() - peg.getHeight()) / 2);
+                
             }
         }
         for(int i = 0; i < peg1.size() - ((whicharray == 1)?1:0); i++) {
@@ -108,10 +113,95 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
 
     @Override
     public void mouseReleased(MouseEvent me) {
-        if(move) {
-            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-            move = false;
-            repaint();
+        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        move = false;
+        switch(whicharray) {
+            case 1:
+                Point one = new Point(Math.max(peg1.get(peg1.size() - 1).p1.x, ppeg2.x), Math.max(peg1.get(peg1.size() - 1).p1.y, ppeg2.y));
+                Point two  = new Point(Math.min(peg1.get(peg1.size() - 1).p1.x + peg1.get(peg1.size() - 1).ring.getWidth(), ppeg2.x + peg.getWidth()),Math.min(peg1.get(peg1.size() - 1).p1.y + peg1.get(peg1.size() - 1).ring.getHeight(), ppeg2.y + peg.getHeight()));
+                Point three = new Point(Math.max(peg1.get(peg1.size() - 1).p1.x, ppeg3.x), Math.max(peg1.get(peg1.size() - 1).p1.y, ppeg3.y));
+                Point four = new Point(Math.min(peg1.get(peg1.size() - 1).p1.x + peg1.get(peg1.size() - 1).ring.getWidth(), ppeg3.x + peg.getWidth()),Math.min(peg1.get(peg1.size() - 1).p1.y + peg1.get(peg1.size() - 1).ring.getHeight(), ppeg3.y + peg.getHeight()));
+                if (one.x < two.x && one.y < two.y) {
+                    if((!peg2.isEmpty() && peg1.get(peg1.size() - 1).value < peg2.get(peg2.size() - 1).value) || peg2.isEmpty()) {
+                        peg2.add(peg1.get(peg1.size() - 1));
+                        peg1.remove(peg1.size() - 1);
+                        whicharray = 2;
+                        peg2.get(peg2.size() - 1).p1 = new Point((this.getWidth() * 12) / 24 - (peg2.get(peg2.size() - 1).ring.getWidth() / 2),((this.getHeight() + peg.getHeight()) / 2) - (60 * peg2.size()) );
+                    } else {
+                        peg1.get(peg1.size() - 1).goBack();
+                    }
+                }else if (three.x < four.x && three.y < four.y) {
+                    if((!peg3.isEmpty() && peg1.get(peg1.size() - 1).value < peg3.get(peg3.size() - 1).value) || peg3.isEmpty()) {
+                        peg3.add(peg1.get(peg1.size() - 1));
+                        peg1.remove(peg1.size() - 1);
+                        whicharray = 3;
+                        peg3.get(peg3.size() - 1).p1 = new Point((this.getWidth() * 19) / 24 - (peg3.get(peg3.size() - 1).ring.getWidth() / 2),((this.getHeight() + peg.getHeight()) / 2) - (60 * peg3.size()) );
+                    } else {
+                        peg1.get(peg1.size() - 1).goBack();
+                    }
+                } else {
+                    peg1.get(peg1.size() - 1).goBack();
+                }
+                repaint();
+                break;
+            case 2:
+                Point o = new Point(Math.max(peg2.get(peg2.size() - 1).p1.x, ppeg1.x), Math.max(peg2.get(peg2.size() - 1).p1.y, ppeg1.y));
+                Point t  = new Point(Math.min(peg2.get(peg2.size() - 1).p1.x + peg2.get(peg2.size() - 1).ring.getWidth(), ppeg1.x + peg.getWidth()),Math.min(peg2.get(peg2.size() - 1).p1.y + peg2.get(peg2.size() - 1).ring.getHeight(), ppeg1.y + peg.getHeight()));
+                Point th = new Point(Math.max(peg2.get(peg2.size() - 1).p1.x, ppeg3.x), Math.max(peg2.get(peg2.size() - 1).p1.y, ppeg3.y));
+                Point f = new Point(Math.min(peg2.get(peg2.size() - 1).p1.x + peg2.get(peg2.size() - 1).ring.getWidth(), ppeg3.x + peg.getWidth()),Math.min(peg2.get(peg2.size() - 1).p1.y + peg2.get(peg2.size() - 1).ring.getHeight(), ppeg3.y + peg.getHeight()));
+                if (o.x < t.x && o.y < t.y) {
+                    if((!peg1.isEmpty() && peg2.get(peg2.size() - 1).value < peg1.get(peg1.size() - 1).value) || peg1.isEmpty()) {
+                        peg1.add(peg2.get(peg2.size() - 1));
+                        peg2.remove(peg2.size() - 1);
+                        whicharray = 1;
+                        peg1.get(peg1.size() - 1).p1 = new Point((this.getWidth() * 5) / 24 - (peg1.get(peg1.size() - 1).ring.getWidth() / 2),((this.getHeight() + peg.getHeight()) / 2) - (60 * peg1.size()) );
+                    } else {
+                        peg2.get(peg2.size() - 1).goBack();
+                    }
+                }else if (th.x < f.x && th.y < f.y) {
+                    if((!peg3.isEmpty() && peg2.get(peg2.size() - 1).value < peg3.get(peg3.size() - 1).value) || peg3.isEmpty()) {
+                        peg3.add(peg2.get(peg2.size() - 1));
+                        peg2.remove(peg2.size() - 1);
+                        whicharray = 3;
+                        peg3.get(peg3.size() - 1).p1 = new Point((this.getWidth() * 19) / 24 - (peg3.get(peg3.size() - 1).ring.getWidth() / 2),((this.getHeight() + peg.getHeight()) / 2) - (60 * peg3.size()) );
+                    } else {
+                        peg2.get(peg2.size() - 1).goBack();
+                    }
+                } else {
+                    peg2.get(peg2.size() - 1).goBack();
+                }
+                repaint();
+                break;
+            case 3:
+                Point a = new Point(Math.max(peg3.get(peg3.size() - 1).p1.x, ppeg1.x), Math.max(peg3.get(peg3.size() - 1).p1.y, ppeg1.y));
+                Point b  = new Point(Math.min(peg3.get(peg3.size() - 1).p1.x + peg3.get(peg3.size() - 1).ring.getWidth(), ppeg1.x + peg.getWidth()),Math.min(peg3.get(peg3.size() - 1).p1.y + peg3.get(peg3.size() - 1).ring.getHeight(), ppeg1.y + peg.getHeight()));
+                Point c = new Point(Math.max(peg3.get(peg3.size() - 1).p1.x, ppeg2.x), Math.max(peg3.get(peg3.size() - 1).p1.y, ppeg2.y));
+                Point d = new Point(Math.min(peg3.get(peg3.size() - 1).p1.x + peg3.get(peg3.size() - 1).ring.getWidth(), ppeg2.x + peg.getWidth()),Math.min(peg3.get(peg3.size() - 1).p1.y + peg3.get(peg3.size() - 1).ring.getHeight(), ppeg2.y + peg.getHeight()));
+                if (a.x < b.x && a.y < b.y) {
+                    if((!peg1.isEmpty() && peg3.get(peg3.size() - 1).value < peg1.get(peg1.size() - 1).value) || peg1.isEmpty()) {
+                        peg1.add(peg3.get(peg3.size() - 1));
+                        peg3.remove(peg3.size() - 1);
+                        whicharray = 1;
+                        peg1.get(peg1.size() - 1).p1 = new Point((this.getWidth() * 5) / 24 - (peg1.get(peg1.size() - 1).ring.getWidth() / 2),((this.getHeight() + peg.getHeight()) / 2) - (60 * peg1.size()) );
+                    } else {
+                        peg3.get(peg3.size() - 1).goBack();
+                    }
+                }else if (c.x < d.x && c.y < d.y) {
+                    if((!peg2.isEmpty() && peg3.get(peg3.size() - 1).value < peg2.get(peg2.size() - 1).value) || peg2.isEmpty()) {
+                        peg2.add(peg3.get(peg3.size() - 1));
+                        peg3.remove(peg3.size() - 1);
+                        whicharray = 2;
+                        peg2.get(peg2.size() - 1).p1 = new Point((this.getWidth() * 12) / 24 - (peg2.get(peg2.size() - 1).ring.getWidth() / 2),((this.getHeight() + peg.getHeight()) / 2) - (60 * peg2.size()) );
+                    } else {
+                        peg3.get(peg3.size() - 1).goBack();
+                    }
+                } else {
+                    peg3.get(peg3.size() - 1).goBack();
+                }
+                repaint();
+                break;
+            default:
+                break;
         }
     }
 
@@ -142,9 +232,9 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
                     peg3.get(peg3.size() - 1).p1.x = pt.x - r1xdiff;
                     peg3.get(peg3.size() - 1).p1.y = pt.y - r1ydiff; 
                     break;
+                default:
+                    break;
             }
-            
-            b = true;
             repaint();
         }
     }
@@ -164,36 +254,45 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     @Override
     public void mousePressed(MouseEvent me) {
         Point pt = me.getPoint();
+        boolean first = false;
         if(peg1.size() > 0) {
             if (pt.x >= peg1.get(peg1.size() - 1).p1.x && pt.y >= peg1.get(peg1.size() - 1).p1.y && pt.x <= (peg1.get(peg1.size() - 1).p1.x + peg1.get(peg1.size() - 1).ring.getWidth()) && pt.y <= (peg1.get(peg1.size() - 1).p1.y + peg1.get(peg1.size() - 1).ring.getHeight())) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 whicharray = 1;
                 r1xdiff = pt.x - peg1.get(peg1.size() - 1).p1.x;
                 r1ydiff = pt.y - peg1.get(peg1.size() - 1).p1.y;
-                b = true;
+                peg1.get(peg1.size() - 1).setorigin();
+                first = true;
                 move = true;
             }
         }
+        boolean second = false;
         if(peg2.size() > 0) {
             if (pt.x >= peg2.get(peg2.size() - 1).p1.x && pt.y >= peg2.get(peg2.size() - 1).p1.y && pt.x <= (peg2.get(peg2.size() - 1).p1.x + peg2.get(peg2.size() - 1).ring.getWidth()) && pt.y <= (peg2.get(peg2.size() - 1).p1.y + peg2.get(peg2.size() - 1).ring.getHeight())) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 whicharray = 2;
                 r1xdiff = pt.x - peg2.get(peg2.size() - 1).p1.x;
                 r1ydiff = pt.y - peg2.get(peg2.size() - 1).p1.y;
-                b = true;
+                peg2.get(peg2.size() - 1).setorigin();
+                second = true;
                 move = true;
             }
         }  
+        boolean third = false;
         if(peg3.size() > 0) {
             if (pt.x >= peg3.get(peg3.size() - 1).p1.x && pt.y >= peg3.get(peg3.size() - 1).p1.y && pt.x <= (peg3.get(peg3.size() - 1).p1.x + peg3.get(peg3.size() - 1).ring.getWidth()) && pt.y <= (peg3.get(peg3.size() - 1).p1.y + peg3.get(peg3.size() - 1).ring.getHeight())) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 whicharray = 3;
                 r1xdiff = pt.x - peg3.get(peg3.size() - 1).p1.x;
                 r1ydiff = pt.y - peg3.get(peg3.size() - 1).p1.y;
-                b = true;
+                peg3.get(peg3.size() - 1).setorigin();
+                third = true;
                 move = true;
             }
         } 
+        if(!first && !second && !third) {
+            whicharray = 0;
+        }
     }
 
     @Override
