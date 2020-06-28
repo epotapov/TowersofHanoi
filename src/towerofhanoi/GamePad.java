@@ -44,14 +44,59 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         addMouseMotionListener(this);
     }
     
-    void ringsAdded() {
+    void ringsAdded() { //base game number of rings can be altered
         peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
         peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
         peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
-        peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
-        peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300, 3));
-        peg1.add(new Ring("src//Resources//ring6.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 360, 2));
-        peg1.add(new Ring("src//Resources//ring7.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 420, 1));
+    }
+    
+    void restartRings(int number) {
+        peg1.clear();
+        peg2.clear();
+        peg3.clear();
+        switch(number) {
+            case 0:
+                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
+                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
+                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
+                break;
+            case 1:
+                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
+                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
+                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
+                peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
+                break;
+            case 2:
+                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
+                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
+                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
+                peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
+                peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300, 3));
+                break;
+            case 3:
+                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
+                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
+                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
+                peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
+                peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300, 3));
+                peg1.add(new Ring("src//Resources//ring6.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 360, 2));
+                break;
+            case 4:
+                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
+                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
+                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
+                peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
+                peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300, 3));
+                peg1.add(new Ring("src//Resources//ring6.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 360, 2));
+                peg1.add(new Ring("src//Resources//ring7.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 420, 1));
+                break;
+            default:
+                break;
+        
+        }
+        
+        whicharray = 0;
+        repaint();
     }
     
     @Override

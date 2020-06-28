@@ -5,6 +5,7 @@
  */
 package towerofhanoi;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
@@ -37,11 +38,12 @@ public class TheTowers {
         gameTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.addActionListener(e -> {
-            window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.Y_AXIS));
+            //window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.Y_AXIS));
+            window.getContentPane().setLayout(new BorderLayout());
             GamePad gamer = new GamePad();
-            GameBar gb = new GameBar();
-            window.getContentPane().add(gb);
-            window.getContentPane().add(gamer);
+            GameBar gb = new GameBar(gamer);
+            window.getContentPane().add(gb, BorderLayout.NORTH);
+            window.getContentPane().add(gamer, BorderLayout.CENTER);
             //gb.setSize(new Dimension(window.getWidth(),100));
             window.remove(homePanel);
             window.setVisible(true);
