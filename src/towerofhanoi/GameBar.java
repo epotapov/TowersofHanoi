@@ -22,6 +22,7 @@ public class GameBar extends JToolBar {
     JPanel panel;
     BoxLayout mainLayout;
     public GameBar(GamePad p) {
+        setFloatable(false);
         panel = new JPanel();
         restartButt = new JButton("Restart");
         downArrow = new JButton("◄");

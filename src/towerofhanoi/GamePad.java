@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public  class GamePad extends JPanel implements MouseListener, MouseMotionListener, ComponentListener{
-
     boolean move = false;
     boolean firsttime = true;
     boolean refresh = false;
@@ -42,6 +41,7 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
+        addComponentListener(this);
     }
     
     void ringsAdded() { //base game number of rings can be altered
@@ -54,47 +54,11 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         peg1.clear();
         peg2.clear();
         peg3.clear();
-        switch(number) {
-            case 0:
-                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
-                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
-                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
-                break;
-            case 1:
-                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
-                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
-                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
-                peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
-                break;
-            case 2:
-                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
-                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
-                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
-                peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
-                peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300, 3));
-                break;
-            case 3:
-                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
-                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
-                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
-                peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
-                peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300, 3));
-                peg1.add(new Ring("src//Resources//ring6.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 360, 2));
-                break;
-            case 4:
-                peg1.add(new Ring("src//Resources//ring1.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
-                peg1.add(new Ring("src//Resources//ring2.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
-                peg1.add(new Ring("src//Resources//ring3.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
-                peg1.add(new Ring("src//Resources//ring4.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240, 4));
-                peg1.add(new Ring("src//Resources//ring5.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 300, 3));
-                peg1.add(new Ring("src//Resources//ring6.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 360, 2));
-                peg1.add(new Ring("src//Resources//ring7.png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 420, 1));
-                break;
-            default:
-                break;
-        
+        ringsAdded();
+        for(int i = 0; i < number; i++) {
+            int n = i + 4;
+            peg1.add(new Ring("src//Resources//ring" + n + ".png",(this.getWidth() * 5) / 24,((this.getHeight() + peg.getHeight()) / 2) - 240 - 60 * i, 4 - i));
         }
-        
         whicharray = 0;
         repaint();
     }
@@ -103,6 +67,12 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     public void componentResized(ComponentEvent e) {
         for(int i = 0; i < peg1.size(); i++) {
             peg1.get(i).resize((this.getWidth() * 5) / 24, ((this.getHeight() + peg.getHeight()) / 2) - (60 * (i + 1)));
+        }
+        for(int i = 0; i < peg2.size(); i++) {
+            peg2.get(i).resize((this.getWidth() * 12) / 24, ((this.getHeight() + peg.getHeight()) / 2) - (60 * (i + 1)));
+        }
+        for(int i = 0; i < peg3.size(); i++) {
+            peg3.get(i).resize((this.getWidth() * 19) / 24, ((this.getHeight() + peg.getHeight()) / 2) - (60 * (i + 1)));
         }
     }
     
@@ -116,7 +86,6 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         g.fillRect(0, 0, getWidth(), getHeight());
         for(int i = 1; i < 25; i++) {
             if (i == 5 || i == 12 || i == 19) {
-                
                 g.drawImage(peg, (this.getWidth() * i) / 24 - (peg.getWidth() / 2), (this.getHeight() - peg.getHeight()) / 2, this);
                 if(i == 5) 
                     ppeg1 = new Point((this.getWidth() * 5) / 24 - (peg.getWidth() / 2), (this.getHeight() - peg.getHeight()) / 2);
@@ -342,16 +311,13 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
 
     @Override
     public void componentMoved(ComponentEvent ce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void componentShown(ComponentEvent ce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void componentHidden(ComponentEvent ce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
