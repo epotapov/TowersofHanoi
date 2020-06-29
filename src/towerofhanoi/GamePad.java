@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public  class GamePad extends JPanel implements MouseListener, MouseMotionListener, ComponentListener{
-    boolean move = false;
+    boolean move = false;       //TODO: get rid of more of the magic numbers and add timer with endgame
     boolean firsttime = true;
     boolean refresh = false;
     boolean last = false;
