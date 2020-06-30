@@ -71,6 +71,8 @@ public class GameBar extends JToolBar {
                 downArrow.setEnabled(true);
                 upArrow.setEnabled(true);
             }
+            timeStop(false);
+            gamer.startTimer = true;
             gamer.restartRings(level);
         });
         upArrow.addActionListener(e -> {
@@ -88,6 +90,8 @@ public class GameBar extends JToolBar {
                 downArrow.setEnabled(true);
                 upArrow.setEnabled(true);
             }
+            timeStop(false);
+            gamer.startTimer = true;
             gamer.restartRings(level);
         });
         time = new JLabel(String.format("%02d", minuteTime) + ":" + String.format("%02d", secondTime));
