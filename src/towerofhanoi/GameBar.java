@@ -33,8 +33,10 @@ public class GameBar extends JToolBar {
     int level;
     JPanel panel;
     BoxLayout mainLayout;
+    GamePad gamer;
     public GameBar(GamePad p) {
         setFloatable(false);
+        gamer = p;
         panel = new JPanel();
         restartButt = new JButton("Restart");
         downArrow = new JButton("◄");
@@ -49,9 +51,10 @@ public class GameBar extends JToolBar {
         restartButt.setPreferredSize(new Dimension(80, 25));
         //mainLayout = new BoxLayout(this, BoxLayout.X_AXIS);
         restartButt.addActionListener(e -> {
-            p.restartRings(level);
+            gamer.restartRings(level);
             timeStop(false);
-            p.startTimer = true;
+            gamer.startTimer = true;
+            gamer.continueGame = true;
         });
         downArrow.addActionListener(e -> {
             difficulty.setText(dLevel[level - 1]);
@@ -60,14 +63,15 @@ public class GameBar extends JToolBar {
                 timeRecord.setText(RTimes[level]);
             } else
                 timeRecord.setText("");
-            p.level = level + 3; 
+            gamer.level = level + 3; 
+            gamer.continueGame = true;
             if(level == 0) {
                 downArrow.setEnabled(false);
             } else {
                 downArrow.setEnabled(true);
                 upArrow.setEnabled(true);
             }
-            p.restartRings(level);
+            gamer.restartRings(level);
         });
         upArrow.addActionListener(e -> {
             difficulty.setText(dLevel[level + 1]);
@@ -76,14 +80,15 @@ public class GameBar extends JToolBar {
                 timeRecord.setText(RTimes[level]);
             } else
                 timeRecord.setText("");
-            p.level = level + 3; 
+            gamer.level = level + 3; 
+            gamer.continueGame = true;
             if(level == dLevel.length - 1) {
                 upArrow.setEnabled(false);
             } else {
                 downArrow.setEnabled(true);
                 upArrow.setEnabled(true);
             }
-            p.restartRings(level);
+            gamer.restartRings(level);
         });
         time = new JLabel(String.format("%02d", minuteTime) + ":" + String.format("%02d", secondTime));
         time.setFont(new Font("", Font.PLAIN, 20));
@@ -121,7 +126,9 @@ public class GameBar extends JToolBar {
             minuteTime++;
         }
         if(minuteTime == 60) {
+            gamer.restartRings(level);
             timeStop(false);
+            gamer.startTimer = true;
         }
     }
     
