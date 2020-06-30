@@ -25,6 +25,8 @@ public class TheTowers {
     static JButton startGame;
     static BoxLayout bl;
     static Font f;
+    static GamePad gamer;
+    static GameBar gb;
     public static void main(String[] args) {
         window = new JFrame("Towers of Hanoi");
         gameTitle = new JLabel("Towers of Hanoi");
@@ -40,8 +42,9 @@ public class TheTowers {
         startGame.addActionListener(e -> {
             //window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.Y_AXIS));
             window.getContentPane().setLayout(new BorderLayout());
-            GamePad gamer = new GamePad();
-            GameBar gb = new GameBar(gamer);
+            gamer = new GamePad();
+            gb = new GameBar(gamer);
+            gamer.addGameBar(gb);
             window.getContentPane().add(gb, BorderLayout.NORTH);
             window.getContentPane().add(gamer, BorderLayout.CENTER);
             //gb.setSize(new Dimension(window.getWidth(),100));

@@ -20,17 +20,19 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     boolean refresh = false;
     boolean last = false;
     boolean nonemovable = false;
+    boolean startTimer = true; //boolean to see if it is the first time initiating a game or also after reset
     ArrayList<Ring> peg1;
     ArrayList<Ring> peg2;
     ArrayList<Ring> peg3;
     Point ppeg1;
     Point ppeg2;
     Point ppeg3;
-    BufferedImage facedude;
     BufferedImage peg;
+    GameBar gb;
     int whicharray = 0;
     int r1xdiff;
     int r1ydiff;
+    int level = 3;
     public GamePad() {
         peg1 = new ArrayList<Ring>();
         peg2 = new ArrayList<Ring>();
@@ -42,6 +44,10 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         addMouseListener(this);
         addMouseMotionListener(this);
         addComponentListener(this);
+    }
+    
+    void addGameBar(GameBar b) {
+        gb = b;
     }
     
     void ringsAdded() { //base game number of rings can be altered
@@ -217,6 +223,10 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
             default:
                 break;
         }
+        if(peg2.size() == level || peg3.size() == level) {
+            gb.timeStop(true);
+            startTimer = true;
+        }
     }
 
     @Override
@@ -271,6 +281,10 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         boolean first = false;
         if(peg1.size() > 0) {
             if (pt.x >= peg1.get(peg1.size() - 1).p1.x && pt.y >= peg1.get(peg1.size() - 1).p1.y && pt.x <= (peg1.get(peg1.size() - 1).p1.x + peg1.get(peg1.size() - 1).ring.getWidth()) && pt.y <= (peg1.get(peg1.size() - 1).p1.y + peg1.get(peg1.size() - 1).ring.getHeight())) {
+                if (startTimer) {
+                    gb.timeFun();
+                    startTimer = false;
+                }
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 whicharray = 1;
                 r1xdiff = pt.x - peg1.get(peg1.size() - 1).p1.x;
