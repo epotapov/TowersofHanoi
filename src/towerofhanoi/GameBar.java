@@ -137,7 +137,8 @@ public class GameBar extends JToolBar {
     }
     
     void timeStop(boolean finished) {
-        tasker.cancel();
+        if(tasker != null) 
+            tasker.cancel();
         if(record < RecordTimes[level] && finished) {
             timeRecord.setText(time.getText());
             RTimes[level] = time.getText();
