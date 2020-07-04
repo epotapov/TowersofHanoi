@@ -10,6 +10,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -36,7 +37,9 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         peg2 = new ArrayList<Ring>();
         peg3 = new ArrayList<Ring>();
         try {
-            peg = ImageIO.read(new File("src//Resources//main-Peg.png"));
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream input = classLoader.getResourceAsStream("Resources/main-Peg.png");
+            peg = ImageIO.read(input);
         }catch(IOException e) {}
         setLayout(null);
         addMouseListener(this);
@@ -61,9 +64,9 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
     }
     
     void ringsAdded() { //base game number of rings can be altered
-        peg1.add(new Ring("src//Resources//ring1.png", peg1x(),((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
-        peg1.add(new Ring("src//Resources//ring2.png", peg1x(),((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
-        peg1.add(new Ring("src//Resources//ring3.png", peg1x(),((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
+        peg1.add(new Ring("Resources/ring1.png", peg1x(),((this.getHeight() + peg.getHeight()) / 2) - 60, 7));
+        peg1.add(new Ring("Resources/ring2.png", peg1x(),((this.getHeight() + peg.getHeight()) / 2) - 120, 6));
+        peg1.add(new Ring("Resources/ring3.png", peg1x(),((this.getHeight() + peg.getHeight()) / 2) - 180, 5));
     }
     
     void restartRings(int number) {
@@ -73,7 +76,7 @@ public  class GamePad extends JPanel implements MouseListener, MouseMotionListen
         ringsAdded();
         for(int i = 0; i < number; i++) {
             int n = i + 4;
-            peg1.add(new Ring("src//Resources//ring" + n + ".png", peg1x(),((this.getHeight() + peg.getHeight()) / 2) - 240 - 60 * i, 4 - i));
+            peg1.add(new Ring("Resources/ring" + n + ".png", peg1x(),((this.getHeight() + peg.getHeight()) / 2) - 240 - 60 * i, 4 - i));
         }
         whicharray = 0;
         repaint();

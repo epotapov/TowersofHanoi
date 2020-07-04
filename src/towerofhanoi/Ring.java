@@ -9,6 +9,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 /**
@@ -22,7 +23,9 @@ public class Ring {
     Point pO;
     public Ring(String file, int xin, int yin, int v) {
         try {
-            ring = ImageIO.read(new File(file));
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream input = classLoader.getResourceAsStream(file);
+            ring = ImageIO.read(input);
         } catch (IOException e) {}
         p1 = new Point(xin - (ring.getWidth() / 2), yin);
         value = v;
