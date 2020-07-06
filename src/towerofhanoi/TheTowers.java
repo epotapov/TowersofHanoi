@@ -6,14 +6,16 @@
 package towerofhanoi;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 /**
  *
  * @author Edward Potapov
@@ -33,7 +35,13 @@ public class TheTowers {
         startGame = new JButton("Let's Play");
         homePanel = new JPanel();
         bl = new BoxLayout(homePanel, BoxLayout.Y_AXIS);
-        f = new Font("Rockwell", Font.PLAIN,90);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream("Resources/ROCK.TTF");
+        try {
+            f = Font.createFont(Font.TRUETYPE_FONT, input).deriveFont(90f);
+        } catch(IOException|FontFormatException e) {
+        }
+        f.deriveFont(90f);
         gameTitle.setFont(f);
         homePanel.setLayout(bl);
         startGame.setPreferredSize(new Dimension(40, 40));

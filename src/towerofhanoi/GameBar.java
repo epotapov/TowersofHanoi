@@ -95,9 +95,10 @@ public class GameBar extends JToolBar {
             gamer.restartRings(level);
         });
         time = new JLabel(String.format("%02d", minuteTime) + ":" + String.format("%02d", secondTime));
-        time.setFont(new Font("Rockwell", Font.PLAIN, 20));
+        Font fsmall = TheTowers.f.deriveFont(20f);
+        time.setFont(fsmall);
         timeRecord = new JLabel();
-        timeRecord.setFont(new Font("Rockwell", Font.PLAIN, 20));
+        timeRecord.setFont(fsmall);
         timeRecord.setForeground(Color.RED);
         //setLayout(mainLayout);
         //add(tb);
